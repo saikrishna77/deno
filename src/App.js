@@ -1,50 +1,27 @@
-import React, { useState } from 'react';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-
-import Login from './components/login.component';
-import SignUp from './components/signup.component';
-import Step2 from './components/Step2';
+import React, {useState} from "react";
+import "./App.css";
+import Denominator from "./Component/Denominator/Denominator";
+import IDMaker from "./Component/ID/ID_Start";
+import NavBar from "./Component/Nav/NavBar";
 
 const App = () => {
+  const [type, setType] = useState("deno");
+  const displayFunction = () => {
+    switch (type) {
+      case "deno":
+        return <Denominator />;
+      case "IDMaker":
+        return <IDMaker />;
+      default:
+        break;
+    }
+  };
   return (
-    <Router>
-      <div className='App'>
-        <nav className='navbar navbar-expand-lg navbar-light fixed-top'>
-          <div className='container'>
-            <Link className='navbar-brand' to={'/sign-in'}>
-              positronX.io
-            </Link>
-            <div className='collapse navbar-collapse' id='navbarTogglerDemo02'>
-              <ul className='navbar-nav ml-auto'>
-                <li className='nav-item'>
-                  <Link className='nav-link' to={'/sign-in'}>
-                    Login
-                  </Link>
-                </li>
-                <li className='nav-item'>
-                  <Link className='nav-link' to={'/sign-up'}>
-                    Sign up
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-
-        <div className='auth-wrapper'>
-          <div className='auth-inner'>
-            <Switch>
-              <Route exact path='/' component={Login} />
-              <Route path='/sign-in' component={Login} />
-              <Route path='/sign-up' component={SignUp} />
-              <Route path='/Step2' component={Step2} />
-            </Switch>
-          </div>
-        </div>
-      </div>
-    </Router>
+    <div className="main-div">
+      <NavBar setType={setType} />
+      <br></br>
+      <div>{displayFunction()}</div>
+    </div>
   );
 };
 
